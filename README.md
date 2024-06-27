@@ -26,7 +26,8 @@ docker rm $(docker ps -a -f status=exited)
 ### Delete images
 ```
 docker rmi <NAME/ID>
-docker rmi $(docker images -a -q)```
+docker rmi $(docker images -a -q)
+```
 
 ### Delete all
 ```docker system prune -a --volumes```
