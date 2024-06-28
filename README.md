@@ -53,19 +53,65 @@ docker logs ('-f' --> real time) <NAME>
 ### Exec container 
 ```docker exec -it <NAME (testapp)> or <NAMESERVICE (mysql)> /bin/bash```
 
-## Run command
-
+### Run command
+```
 docker run 
     -d          ---> background mode
     --name      ---> define name
     --rm        ---> remove container after exits
     -p          ---> port mapping
     -e          ---> env
-#Example
-docker run -d -p <PORT_LOCAL>:<PORT_DOCKER> --name <TESTNAME> <IMAGENAME>:<TAG>
+    -v          ---> 1. volume PATH(HOST):PATH(Docker container)
+                ---> 2. anonymous volume PATH(Docker container)
+                ---> 3. named volume NAME:PATH(Docker container)
+                           cd /var/lib/docker/volumes
+    --net       ---> network name
+    --ip        ---> unreal ip
+```   
+### Example
+- [x] docker run -d -p <PORT_LOCAL>:<PORT_DOCKER> --name <TESTNAME> <IMAGENAME>:<TAG>
 
-## ENV
+- [x] docker run --name test-nginx-85-80 -d -it -p x.x.x.x:85:80 nginx
 
--e 
+- [x] docker run --name test-nginx-86-80 -d -it -v /usr/TEST/volumes:/usr/share/nginx/html 
+-p x.x.x.x:86:80 nginx
 
+### Volume command
+```
+docker volume 
+    create          ---> create a volume
+    inspect         ---> display detailed information on one or more volume
+    ls              ---> list volumes
+    prune           ---> remove unused local volumes
+    rm              ---> remove one or more volumes
+```  
+### Network command
+```
+docker network 
+    create  (-d, --drive)        ---> create a network
+                 bridge
+                 host
+                 none
+                 macvlan
+                 ipvlan
+            (--subnet x.x.x.x./x)
+            (--gateway)
+            (--ip-range x.x.x.x/x)
+            (-o parent=<ens-->) ---> option parent for macvlan
+    connect                     ---> <NAMENETWORK> <NAMECONTAINER>
+    disconnect                  ---> <NETWORK_ID> <NAMECONTAINER>            
+    inspect                     ---> display detailed information 
+    ls                          ---> list network
+    rm                          ---> remove one or more network
+```
+### Example
+- [x] docker run -d -it --name <TESTNAME-1> --net <NAMENETWORK> <IMAGENAME>:<TAG> /bin/bash
+- [x] docker run -d -it --name <TESTNAME-2> --net <NAMENETWORK> <IMAGENAME>:<TAG> /bin/bash
+- [x] ping from <TESTNAME-1> to <TESTNAME-2> --> ip or DNS --> success
+
+- [x] docker network crate -d macvlan --subnet x.x.x.x/24 --gateway x.x.x.x -o parent=ens00 <TESTNET>
+- [x] docker run -d -it --name <TESTFILE> --ip x.x.x.x --net <TESTNET> <IMAGENAME>:<TAG> /bin/bash
+
+### ENV
+```-e ```
 
