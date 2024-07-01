@@ -60,6 +60,7 @@ docker run
     --name      ---> define name
     --rm        ---> remove container after exits
     -p          ---> port mapping
+    -P          ---> random port
     -e          ---> env
     -v          ---> 1. volume PATH(HOST):PATH(Docker container)
                 ---> 2. anonymous volume PATH(Docker container)
@@ -112,6 +113,22 @@ docker network
 - [x] docker network crate -d macvlan --subnet x.x.x.x/24 --gateway x.x.x.x -o parent=ens00 <TESTNET>
 - [x] docker run -d -it --name <TESTFILE> --ip x.x.x.x --net <TESTNET> <IMAGENAME>:<TAG> /bin/bash
 
+### Build command
+```
+docker build
+    -t          ---> create <NAME:TAG>
+```
+
+### Image command
+```
+docker image 
+    build                       ---> build an image from a Dockerfile
+    history                     ---> history images
+    inspect                     ---> detailed information
+    ls                          ---> list images
+    rm                          ---> remove images
+    tag                         ---> docker tag <ID_IMAGE:TAG> <NEWNAME:TAG>
+```  
 ### ENV
 ```-e ```
 
