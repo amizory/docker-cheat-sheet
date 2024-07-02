@@ -68,14 +68,7 @@ docker run
                            cd /var/lib/docker/volumes
     --net       ---> network name
     --ip        ---> unreal ip
-```   
-### Example
-- [x] docker run -d -p <PORT_LOCAL>:<PORT_DOCKER> --name <TESTNAME> <IMAGENAME>:<TAG>
-
-- [x] docker run --name test-nginx-85-80 -d -it -p x.x.x.x:85:80 nginx
-
-- [x] docker run --name test-nginx-86-80 -d -it -v /usr/TEST/volumes:/usr/share/nginx/html 
--p x.x.x.x:86:80 nginx
+```
 
 ### Volume command
 ```
@@ -85,7 +78,16 @@ docker volume
     ls              ---> list volumes
     prune           ---> remove unused local volumes
     rm              ---> remove one or more volumes
-```  
+```    
+
+### Example
+- [x] docker run -d -p <PORT_LOCAL>:<PORT_DOCKER> --name <TESTNAME> <IMAGENAME>:<TAG>
+
+- [x] docker run --name test-nginx-85-80 -d -it -p x.x.x.x:85:80 nginx
+
+- [x] docker run --name test-nginx-86-80 -d -it -v /usr/TEST/volumes:/usr/share/nginx/html 
+-p x.x.x.x:86:80 nginx
+
 ### Network command
 ```
 docker network 
@@ -105,6 +107,7 @@ docker network
     ls                          ---> list network
     rm                          ---> remove one or more network
 ```
+
 ### Example
 - [x] docker run -d -it --name <TESTNAME-1> --net <NAMENETWORK> <IMAGENAME>:<TAG> /bin/bash
 - [x] docker run -d -it --name <TESTNAME-2> --net <NAMENETWORK> <IMAGENAME>:<TAG> /bin/bash
@@ -128,7 +131,44 @@ docker image
     ls                          ---> list images
     rm                          ---> remove images
     tag                         ---> docker tag <ID_IMAGE:TAG> <NEWNAME:TAG>
-```  
+```   
+
 ### ENV
-```-e ```
+```-e  ---> if we set <-e TEST=123> and Dockerfile has <TEST=abc>, we will display 123```
+
+### Dockerfile command
+```
+FROM
+LABEL
+COPY
+RUN
+EXPOSE
+VOLUME
+ENV
+ENTRYPOINT
+CMD
+```
+
+### Base example Dockerfile
+```
+FROM ubuntu:latest
+RUN apt-get update
+
+#NGINX
+RUN apt-get install nginx -y
+#APACHE
+RUN apt-get install apache2 -y
+
+RUN apt-get clean
+WORKDIR /var/www/html/
+COPY index.html .
+ENV TEST=123
+LABEL autor=Dmitry
+EXPOSE 80
+
+#NGINX
+CMD ["nginx","-g","daemon off;"]
+#APACHE
+CMD ["apache2ctl","-D","FOREGROUND"]
+```
 
