@@ -172,3 +172,32 @@ CMD ["nginx","-g","daemon off;"]
 CMD ["apache2ctl","-D","FOREGROUND"]
 ```
 
+### Docker compose command 
+```docker compose logs -f <NAME/ID>```
+
+### Simple file docker compose
+```
+version: "version"
+volumes:
+    data:
+services:
+    <NAME>:
+        image: <ISO:TAG>
+        container_name: <NAME>
+        volumes:
+            - <PATH_HOST>:<PATH_CONTAINER>
+            - data:<PATH_CONTAINER>
+        ports:
+            - "xxxx:xxxx"
+        environment:
+            - TEST=12345
+        depends_on:
+            - <SOME_APP>
+        restart: <no, always, unless-stopped, on-failure>
+        network:
+            - my_network
+networks:
+    default:
+        driver: bridge
+        name: my_network
+```
