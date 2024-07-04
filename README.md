@@ -4,8 +4,7 @@
 
 ### Version
 
-```bash
-docker -v```
+```docker -v```
 
 ### Status
 
@@ -16,13 +15,11 @@ service docker status
 
 ### Container list
 
-```bash
-docker ps -a```
+```docker ps -a```
 
 ### Images list
 
-```bash
-docker images```
+```docker images```
 
 ### Delete container
 
@@ -40,13 +37,11 @@ docker rmi $(docker images -a -q)
 
 ### Delete all
 
-```bash
-docker system prune -a --volumes```
+```docker system prune -a --volumes```
 
 ### Pull image
 
-```bash
-docker pull <NAME>```
+```docker pull <NAME>```
 
 ### Container
 
@@ -67,8 +62,7 @@ docker logs ('-f' --> real time) <NAME>
 
 ### Exec container
 
-```bash
-docker exec -it <NAME (testapp)> or <NAMESERVICE (mysql)> /bin/bash```
+```docker exec -it <NAME (testapp)> or <NAMESERVICE (mysql)> /bin/bash```
 
 ### Run command
 
@@ -162,8 +156,7 @@ docker image
 
 ### ENV
 
-```bash
--e  ---> if we set <-e TEST=123> and Dockerfile has <TEST=abc>, we will display 123```
+```-e  ---> if we set <-e TEST=123> and Dockerfile has <TEST=abc>, we will display 123```
 
 ### Dockerfile command
 
@@ -235,4 +228,4 @@ networks:
         name: my_network
 ```
 
-- [x] 1sdsdf
+- [x] TEST
