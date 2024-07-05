@@ -4,7 +4,10 @@
 
 ### Version
 
-```docker -v```
+```bash
+docker -v
+docker login
+```
 
 ### Status
 
@@ -39,9 +42,12 @@ docker rmi $(docker images -a -q)
 
 ```docker system prune -a --volumes```
 
-### Pull image
+### Pull-Push image
 
-```docker pull <NAME>```
+```bash
+docker pull <NAME_IMAGE>
+docker push <NAME_IMAGE>
+```
 
 ### Container
 
@@ -58,6 +64,7 @@ docker restart <NAME/ID>
 docker inspect <NAME>
 docker stats <NAME>
 docker logs ('-f' --> real time) <NAME>
+docker port <NAME>
 ```
 
 ### Exec container
@@ -96,12 +103,15 @@ docker volume
 ### Example
 
 ```bash
-docker run -d -p <PORT_LOCAL>:<PORT_DOCKER> --name TESTNAME IMAGENAME:TAG
+docker run -d -p <PORT_LOCAL>:<PORT_DOCKER> --name <TESTNAME> <IMAGENAME:TAG>
 
 docker run --name test-nginx-85-80 -d -it -p x.x.x.x:85:80 nginx
 
 docker run --name test-nginx-86-80 -d -it -v /usr/TEST/volumes:/usr/share/nginx/html
 -p x.x.x.x:86:80 nginx
+
+docker run --name test-nginx-random-80 -d -it -v /test:/var/www/html
+-P nginx
 ```
 
 ### Network command
@@ -118,8 +128,8 @@ docker network
             (--gateway)
             (--ip-range x.x.x.x/x)
             (-o parent=<ens-->) ---> option parent for macvlan
-    connect                     ---> <NAMENETWORK> <NAMECONTAINER>
-    disconnect                  ---> <NETWORK_ID> <NAMECONTAINER>            
+    connect                     ---> <NAME_NETWORK> <NAME_CONTAINER>
+    disconnect                  ---> <NETWORK_ID> <NAME_CONTAINER>            
     inspect                     ---> display detailed information 
     ls                          ---> list network
     rm                          ---> remove one or more network
@@ -128,12 +138,13 @@ docker network
 ### Example
 
 ```bash
-docker run -d -it --name TEST_NAME-1 --net NAME_NETWORK IMAGE_NAME:TAG /bin/bash
-docker run -d -it --name TEST_NAME-2 --net NAME_NETWORK IMAGE_NAME:TAG /bin/bash
-ping from TEST_NAME-1 to TEST_NAME-2 --> ip or DNS --> success
+docker run -d -it --name <TEST_NAME-1> --net <NAME_NETWORK> <IMAGE_NAME:TAG> /bin/bash
+docker run -d -it --name <TEST_NAME-2> --net <NAME_NETWORK> <IMAGE_NAME:TAG> /bin/bash
+ping from <TEST_NAME-1> to <TEST_NAME-2> --> ip or DNS --> success
 
-docker network crate -d macvlan --subnet x.x.x.x/24 --gateway x.x.x.x -o parent=ens00 TEST_NET
-docker run -d -it --name TEST_FILE --ip x.x.x.x --net TEST_NET IMAGE_NAME:TAG /bin/bash
+docker network create -d macvlan --subnet x.x.x.x/24 --gateway x.x.x.x -o parent=ens00 TEST_NET
+docker run -d -it --name <TEST_FILE> --ip x.x.x.x --net <TEST_NET> <IMAGE_NAME:TAG> /bin/bash
+```
 
 ### Build command
 
@@ -226,6 +237,16 @@ networks:
     default:
         driver: bridge
         name: my_network
+```
+
+### Docker Hub
+
+```bash
+1 ---> create rep in Docker Hub
+2 ---> docker tag <OLDNAME:TAG> <NEWNAME:TAG>
+3 ---> docker login
+4 ---> docker push <NEWNAME:TAG>
+5 ---> docker run 
 ```
 
 - [x] TEST
