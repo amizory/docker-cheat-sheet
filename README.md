@@ -246,7 +246,7 @@ networks:
 2 ---> docker tag <OLDNAME:TAG> <NEWNAME:TAG>
 3 ---> docker login
 4 ---> docker push <NEWNAME:TAG>
-5 ---> docker run 
+5 ---> docker run -d -it --name <NAME> -P <ISO:TAG>
 ```
 
 - [x] TEST
