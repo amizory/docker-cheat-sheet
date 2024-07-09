@@ -213,7 +213,7 @@ CMD ["apache2ctl","-D","FOREGROUND"]
 
 ### Simple file docker compose
 
-```docker-compose.yml
+```yml
 version: "version"
 volumes:
     data:
@@ -237,6 +237,9 @@ networks:
     default:
         driver: bridge
         name: my_network
+# networks:
+#     my_network:
+#         driver: bridge
 ```
 
 ### Docker Hub
