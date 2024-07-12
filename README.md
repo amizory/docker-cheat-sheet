@@ -2,6 +2,18 @@
 
 ## Base command
 
+```txt
+notes:
+    containers:
+    1 - restart the docker after turning off the computer
+    2 - if you are using a virtual machine when port mapping is used -p :<port> access via localhost:<random> or linux_ip: <random> "port shielding"
+    
+    docker hub and tag version
+    1 - docker build -t ABC:TAG .
+    2 - docker tag ABC:TAG <REPOS_NAME>:required version
+    3 - docker push <REPOS_NAME>:required version
+```
+
 ### Version
 
 ```bash
@@ -151,6 +163,8 @@ docker run -d -it --name <TEST_FILE> --ip x.x.x.x --net <TEST_NET> <IMAGE_NAME:T
 ```bash
 docker build
     -t          ---> create <NAME:TAG>
+
+docker build -t <NAME:TAG> .
 ```
 
 ### Image command
